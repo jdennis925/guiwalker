@@ -41,6 +41,19 @@ namespace GUIWalker
             return 0;
         }
 
+        //comparison conversion between AutomationElement and ElementEntry objects.
+        public bool ElementIsEntry(AutomationElement element, ElementEntry entry)
+        {
+            if (element.Current.Name == entry.Name
+                && element.Current.AutomationId == entry.AutomationId
+                && element.Current.ControlType == entry.mControlType
+                )
+                return true;
+            return false;
+        }
+
+
+
         List<ElementEntry> mElementTracker = new List<ElementEntry> { };
         public AutomationElement GetElementPriority(AutomationElementCollection inCollection)
         {
@@ -53,7 +66,7 @@ namespace GUIWalker
 
                 var elementLog =
                     from myElem in mElementTracker
-                    where (myElem.Name == iter.Current.Name)
+                    where (ElementIsEntry(iter, myElem))
                     select myElem;
 
                 if (elementLog.Count() == 0)
@@ -74,7 +87,7 @@ namespace GUIWalker
             //currentElements.Sort(PrioritizeElementEntries);
             foreach (var elem in currentElements.OrderBy(p => p.Priority))
             {
-                StreamManager.WriteLine(elem.Name + " " + elem.Priority);
+                StreamManager.WriteLine(elem.Name + " " + elem.AutomationId + " " + elem.Priority);
             }
 
 
@@ -88,31 +101,31 @@ namespace GUIWalker
             AutomationElement returnElement = null;
             int randomVal = rand.Next(sumPriority);
             int count = randomVal;
-            foreach (ElementEntry elem in currentElements)
+            foreach (ElementEntry myEntry in currentElements)
             {
-                if (count < elem.Priority && returnElement == null)
+                if (count < myEntry.Priority && returnElement == null)
                 {
-                    elem.Priority--;
+                    myEntry.Priority--;
                     var elementLog =
                     from AutomationElement myElem in inCollection
-                    where (myElem.Current.Name == elem.Name)
+                    where (ElementIsEntry(myElem, myEntry))
                     select myElem;
-                    StreamManager.WriteLine("CHOOSE: " + elementLog.First().Current.Name);
-                    elem.Priority = 100;
+                    StreamManager.WriteLine("CHOOSE: " + elementLog.First().Current.Name + elementLog.First().Current.AutomationId);
+                    myEntry.Priority = 100;
                     returnElement = elementLog.First();
                 }
                 else
                 {
-                    count -= elem.Priority;
-                    elem.Priority++;
+                    count -= myEntry.Priority;
+                    myEntry.Priority++;
                 }
 
                     var updateLog =
                     from myElem in mElementTracker
-                    where (myElem.Name == elem.Name)
+                    where (myElem.Name == myEntry.Name)
                     select myElem;
                 
-                    updateLog.First().Priority = elem.Priority;
+                    updateLog.First().Priority = myEntry.Priority;
             }
 
 
