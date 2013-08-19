@@ -19,15 +19,13 @@ namespace GUIWalker
         private PatternManager patternManager = new PatternManager();
         private ElementPicker elemPicker = new ElementPicker();
 
-        //stream stuff 
-        static private string DesktopLoc = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\HackLog\\WalkerLog.txt";
-
         public void DFSwalk()
         {
 
             pApp = Process.Start(@"D:\Users\Dennis\Desktop\Hackathon\guitesting\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe");
+            //pApp = Process.Start(@"D:\Users\Dennis\RPCPro.NET_local\RPCPro .NET\Bin\ProjectManager.exe");
             while (pApp.MainWindowHandle == IntPtr.Zero)
-                Thread.Sleep(1000);
+               Thread.Sleep(1000);
 
             AutomationElement ParentWindow = AutomationElement.FromHandle(pApp.MainWindowHandle);
             //AutomationElementCollection DesktopChildren = AutomationElement.RootElement.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.IsEnabledProperty, true));
@@ -37,7 +35,20 @@ namespace GUIWalker
             {
                 AutomationElementCollection ElementCollection = ParentWindow.FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.IsEnabledProperty, true));
 
-                AutomationElement iter = elemPicker.GetElementRandom(ElementCollection);
+
+                List<AutomationElement> windows = new List<AutomationElement>{};
+                foreach (AutomationElement myIter in ElementCollection)
+                {
+                    if (myIter.Current.ControlType == ControlType.Window)
+                        windows.Add(myIter);
+                }
+
+
+
+
+                
+
+                AutomationElement iter = elemPicker.GetElementPriority(ElementCollection);
                 if (iter == null)
                     continue;
 
@@ -48,12 +59,9 @@ namespace GUIWalker
                     patternManager.executePattern(iter, validPatterns[patternIndex]);
 
 
+                    StreamManager.WriteLine(validPatterns[patternIndex].ProgrammaticName + " " + iter.Current.Name.ToString(), true, false);
+                    StreamManager.WriteLine(iter.Current.Name + " " + iter.Current.AutomationId + " " + validPatterns[patternIndex].ProgrammaticName, false);
 
-                    //Logging
-                    Console.WriteLine(validPatterns[patternIndex].ProgrammaticName + " " + iter.Current.Name.ToString());
-                    StreamWriter mLog = new StreamWriter(DesktopLoc, true);
-                    mLog.WriteLine(iter.Current.Name + " " + iter.Current.AutomationId + " " + validPatterns[patternIndex].ProgrammaticName);
-                    mLog.Close();
                 }
             }
 

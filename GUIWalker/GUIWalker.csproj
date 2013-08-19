@@ -52,6 +52,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="PatternManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StreamManager.cs" />
     <Compile Include="Walker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -71,9 +71,13 @@ namespace GUIWalker
             }
 
             //sort current elements by rank.
-            currentElements.Sort(PrioritizeElementEntries);
+            //currentElements.Sort(PrioritizeElementEntries);
+            foreach (var elem in currentElements.OrderBy(p => p.Priority))
+            {
+                StreamManager.WriteLine(elem.Name + " " + elem.Priority);
+            }
 
-            //
+
             int sumPriority = 0;
             foreach (ElementEntry elem in currentElements)
             {
@@ -93,6 +97,8 @@ namespace GUIWalker
                     from AutomationElement myElem in inCollection
                     where (myElem.Current.Name == elem.Name)
                     select myElem;
+                    StreamManager.WriteLine("CHOOSE: " + elementLog.First().Current.Name);
+                    elem.Priority = 100;
                     returnElement = elementLog.First();
                 }
                 else
