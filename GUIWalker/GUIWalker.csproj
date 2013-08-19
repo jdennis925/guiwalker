@@ -47,6 +47,7 @@
     <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElementEntry.cs" />
     <Compile Include="ElementPicker.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="PatternManager.cs" />
