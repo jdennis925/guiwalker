@@ -71,7 +71,7 @@ namespace GUIWalker
 
                 if (elementLog.Count() == 0)
                 { //new element
-                    mElementTracker.Add(new ElementEntry { Name = iter.Current.Name, AutomationId = iter.Current.AutomationId, mControlType = iter.Current.ControlType, Priority = 100 });
+                    mElementTracker.Add(new ElementEntry { Name = iter.Current.Name, AutomationId = iter.Current.AutomationId, mControlType = iter.Current.ControlType, Priority = 1 });
                 }
                 if (elementLog.Count() <= 1)
                 { //recover old element
@@ -110,8 +110,8 @@ namespace GUIWalker
                     from AutomationElement myElem in inCollection
                     where (ElementIsEntry(myElem, myEntry))
                     select myElem;
-                    StreamManager.WriteLine("CHOOSE: " + elementLog.First().Current.Name + elementLog.First().Current.AutomationId);
-                    myEntry.Priority = 100;
+                    StreamManager.WriteLine("CHOOSE: " + elementLog.First().Current.Name + " " + elementLog.First().Current.AutomationId);
+                    myEntry.Priority = 1;
                     returnElement = elementLog.First();
                 }
                 else
@@ -128,10 +128,6 @@ namespace GUIWalker
                     updateLog.First().Priority = myEntry.Priority;
             }
 
-
-
-
-
             return returnElement;
         }
 
@@ -139,6 +135,7 @@ namespace GUIWalker
         private static string[] skipNames = {
                                            "Close",
                                            "Exit",
+                                           "Cancel",
                                            "Minimize",
                                            "Maximize",
 										   "Import",
