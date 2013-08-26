@@ -8,9 +8,9 @@ using System.Windows.Automation;
 
 namespace GUIWalker
 {
-    class PatternManager
+    public static class PatternManager
     {
-        public void executePattern(AutomationElement subject, AutomationPattern inPattern)
+        static public void executePattern(AutomationElement subject, AutomationPattern inPattern, string inValue = null)
         {
             try
             {
@@ -38,6 +38,13 @@ namespace GUIWalker
                         {
                             ExpandCollapsePattern exColPat = (ExpandCollapsePattern)subject.GetCurrentPattern(ExpandCollapsePattern.Pattern);
                             // exColPat.Expand();
+                            break;
+                        }
+                    case "ValuePatternIdentifiers.Pattern":
+                        {
+                            ValuePattern valpat = (ValuePattern)subject.GetCurrentPattern(ValuePattern.Pattern);
+                            if (inValue != null)
+                                valpat.SetValue(inValue);
                             break;
                         }
                 }

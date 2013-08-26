@@ -3,16 +3,48 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUIWalker", "GUIWalker\GUIWalker.csproj", "{76600D27-707C-434D-9C90-55A16762C511}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegressionTests", "RegressionTests\RegressionTests.csproj", "{6B5AD802-A94A-44A6-98EE-6353E654448A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E6C9182C-46DF-4B8D-BFE1-606CCEE9018D}"
+	ProjectSection(SolutionItems) = preProject
+		GUIWalker.vsmdi = GUIWalker.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = GUIWalker.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76600D27-707C-434D-9C90-55A16762C511}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{76600D27-707C-434D-9C90-55A16762C511}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{76600D27-707C-434D-9C90-55A16762C511}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{76600D27-707C-434D-9C90-55A16762C511}.Debug|x86.ActiveCfg = Debug|x86
 		{76600D27-707C-434D-9C90-55A16762C511}.Debug|x86.Build.0 = Debug|x86
+		{76600D27-707C-434D-9C90-55A16762C511}.Release|Any CPU.ActiveCfg = Release|x86
+		{76600D27-707C-434D-9C90-55A16762C511}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{76600D27-707C-434D-9C90-55A16762C511}.Release|Mixed Platforms.Build.0 = Release|x86
 		{76600D27-707C-434D-9C90-55A16762C511}.Release|x86.ActiveCfg = Release|x86
 		{76600D27-707C-434D-9C90-55A16762C511}.Release|x86.Build.0 = Release|x86
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6B5AD802-A94A-44A6-98EE-6353E654448A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

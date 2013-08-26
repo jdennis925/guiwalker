@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="ElementEntry.cs" />
     <Compile Include="ElementPicker.cs" />
+    <Compile Include="frmCut.cs" />
+    <Compile Include="frmCutOptions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="PatternManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
