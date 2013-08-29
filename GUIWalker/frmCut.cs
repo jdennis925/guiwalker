@@ -18,8 +18,8 @@ namespace GUIWalker
         {
             AutomationElementCollection CutCollection = getCutCollection();
 
-            //timehistory
-            if (options.inTimeHistory != null)
+            //timehistory && regions
+            if (options.inTimeHistory != null || options.inRegions != null)
             {
                 AutomationElement inputGroup = null;
                 for (int i = 0; i < CutCollection.Count && inputGroup == null; i++)
@@ -27,14 +27,35 @@ namespace GUIWalker
                     if (CutCollection[i].Current.AutomationId == "fraInputs")
                         inputGroup = CutCollection[i];
                 }
-                AutomationElementCollection inputCollection = inputGroup.FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.IsEnabledProperty, true));
 
-                foreach (AutomationElement iter in inputCollection)
+                AutomationElementCollection inputChildren = inputGroup.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.IsEnabledProperty, true));
+                foreach (AutomationElement inputChild in inputChildren)
                 {
-                    AutomationPattern[] validPatterns = iter.GetSupportedPatterns();
-                    if (iter.Current.ControlType == ControlType.ListItem && iter.Current.Name == options.inTimeHistory)
+                    if (options.inRegions != null && inputChild.Current.AutomationId == "brInputRegions")
                     {
-                        PatternManager.executePattern(iter, SelectionItemPattern.Pattern);
+                        AutomationElementCollection regionCollection = inputChild.FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.IsEnabledProperty, true));
+                        foreach (AutomationElement RegionsItem in regionCollection)
+                        {
+                            if (RegionsItem.Current.ControlType == ControlType.ListItem && RegionsItem.Current.Name == options.inRegions)
+                            {
+                                PatternManager.executePattern(RegionsItem, SelectionItemPattern.Pattern);
+                                break;
+                            }
+                        }
+                    }
+
+
+                    if (options.inTimeHistory != null && inputChild.Current.AutomationId == "brInputTH")
+                    {
+                        AutomationElementCollection thCollection = inputChild.FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.IsEnabledProperty, true));
+                        foreach (AutomationElement thItem in thCollection)
+                        {
+                            if (thItem.Current.ControlType == ControlType.Edit)
+                            {
+                                PatternManager.executePattern(thItem, ValuePattern.Pattern, options.inTimeHistory);
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -67,6 +88,11 @@ namespace GUIWalker
                 }
             }
 
+            //checkboxes
+            if (options.TaperEntirely != null)
+            {
+                //scaffolding
+            }
 
 
         }

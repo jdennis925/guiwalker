@@ -63,7 +63,7 @@ namespace RegressionTests
         [TestMethod]
         public void CutToolTest()
         {
-            frmCut theFrm = new frmCut(new frmCutOptions { inTimeHistory = "simult_rsp", taperMode = frmCutOptions.eTaperMode.Mean});
+            frmCut theFrm = new frmCut(new frmCutOptions { inTimeHistory = "Stats_MaxErr", inRegions = "MasterStarting_DynamicRegions", taperMode = frmCutOptions.eTaperMode.Mean });
 
         }
     }
